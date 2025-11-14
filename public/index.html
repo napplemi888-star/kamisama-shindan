@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>神様診断｜全領域異常解決室</title>
+  <title>KAMIGAMI ANALYSIS｜あなたに宿る神を知る</title>
   <style>
     body {
       font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
@@ -47,42 +47,35 @@
       color: #fff;
       font-weight: bold;
       font-size: 1.1em;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
       box-shadow: 0 0 10px rgba(255,255,255,0.3);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */
+      text-shadow:
+      0px 0px 8px rgba(0,0,0,0.3),
+      1px 1px 3px rgba(0,0,0,0.3),
+      -1px -1px 3px rgba(0,0,0,0.3);
+      border: 3px solid transparent;
     }
     .options label:hover {
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
-
-    /* パステル＋グラデーション＋キラキラ感 */
-    .blue {
-      background: linear-gradient(135deg, #a5d8ff, #c7f9ff);
-      box-shadow: 0 0 15px rgba(100,180,255,0.5);
-    }
-    .red {
-      background: linear-gradient(135deg, #ffb3b3, #ffd6d6);
-      box-shadow: 0 0 15px rgba(255,150,150,0.5);
-    }
-    .yellow {
-      background: linear-gradient(135deg, #fff3b0, #ffe8a3);
-      color: #333;
-      box-shadow: 0 0 15px rgba(255,230,150,0.5);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-    .white {
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-      color: #333;
-      box-shadow: 0 0 15px rgba(220,220,220,0.6);
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    }
-    .black {
-      background: linear-gradient(135deg, #a5a5a5, #4b4b4b);
-      box-shadow: 0 0 15px rgba(80,80,80,0.6);
+    .options label.selected {
+      border: 3px solid rgba(160,85,247,0.8);
+      box-shadow: 0 0 25px rgba(160,85,247,0.5);
     }
 
-    button {
+    .blue { background: linear-gradient(180deg, #a5d8ff, #c7f9ff);}
+    .red { background: linear-gradient(180deg, #ffb3b3, #ffd6d6);}
+    .yellow { background: linear-gradient(180deg, #fff3b0, #ffe8a3);}
+    .black { background: linear-gradient(180deg, #d1d1d1, #6b6b6b);}
+    .white { background: linear-gradient(180deg, #ffffff, #f1f1f1);
+          text-shadow:
+      0px 0px 8px rgba(0,0,0,0.4),
+      1px 1px 3px rgba(0,0,0,0.4),
+      -1px -1px 3px rgba(0,0,0,0.4)!important;}
+
+    /* button {
       margin-top: 25px;
       padding: 12px 25px;
       font-size: 16px;
@@ -97,6 +90,23 @@
     button:hover {
       transform: scale(1.05);
       box-shadow: 0 0 25px rgba(200,150,255,0.6);
+    } */
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgb(108,110,219), #eb61a8);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(150,100,255,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(200,150,255,0.4);
     }
 
     .result {
@@ -110,21 +120,41 @@
       color: #555;
     }
     .result p {
-      font-size: 2.8em;
+      font-size: 2.6em;
       font-weight: bold;
       background: linear-gradient(90deg, #60a5fa, #f472b6, #facc15);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow:
-        1px 1px 2px rgba(0,0,0,0.3),
-        -1px -1px 2px rgba(0,0,0,0.3),
-        2px 2px 4px rgba(0,0,0,0.2);
+        1px 1px 2px rgba(0,0,0,0.4),
+        -1px -1px 2px rgba(0,0,0,0.4);
     }
+    .share-buttons {
+      margin-top: 30px;
+    }
+    .share-buttons button {
+      margin: 8px;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .share-buttons button:hover {
+      transform: scale(1.05);
+    }
+    #twitterShare { background: #1da1f2; }
+    #facebookShare { background: #1877f2; }
+    #lineShare { background: #06c755; }
+    #instagramShare { background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); }
+    #tiktokShare { background: linear-gradient(45deg, #25f4ee, #fe2c55); }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>神様診断</h1>
+    <h1>KAMIGAMI ANALYSIS<br>-あなたに宿る神を知る- </h1>
     <p id="progress">第1問 / 10問</p>
 
     <div id="questionContainer"></div>
@@ -134,25 +164,39 @@
     <div class="result" id="result">
       <h2>あなたを導く神は…</h2>
       <p id="resultText"></p>
+      <!-- <div class="share-buttons" id="shareButtons" style="display:none;">
+        <p>結果をシェアしよう！</p>
+        <button id="twitterShare">X（旧Twitter）</button>
+        <button id="facebookShare">Facebook</button>
+        <button id="lineShare">LINE</button>
+        <button id="instagramShare">Instagram</button>
+        <button id="tiktokShare">TikTok</button>
+      </div> -->
     </div>
   </div>
 
   <script>
     const questions = [
-      { q: "あなたが新しい場所に行くときの気持ちは？", a: ["ワクワクして探検したくなる", "みんなで楽しめることを考える", "まず安全や準備を確認する", "道順や目的をしっかり把握する", "静かにその場の空気を感じたい"] },
-      { q: "あなたが大切にしている価値観は？", a: ["知恵と学び", "信頼と誠実", "礼節と秩序", "正義と導き", "思いやりと優しさ"] },
-      { q: "困難に直面したとき、あなたはどう動く？", a: ["新しい方法を試してみる", "周囲を励ましながら乗り越える", "現実的な手段で一歩ずつ解決する", "状況を見極めて最善の道を選ぶ", "無理せず心を落ち着けて対応する"] },
-      { q: "あなたが最も惹かれる自然の要素は？", a: ["木々の成長や森の香り", "炎のゆらめきや太陽の光", "大地のぬくもりや実り", "金属の輝きや風の音", "水の流れや波の音"] },
-      { q: "あなたが得意とする感覚は？", a: ["香りや空気の変化に敏感", "音や声のトーンを感じ取る", "味や食のバランスを見抜く", "見る力・観察力が鋭い", "触れた感覚で安心を感じる"] },
-      { q: "仲間と過ごすとき、あなたの役割は？", a: ["新しいアイデアを出す", "ムードメーカーとして盛り上げる", "実務を支えてまとめる", "方向性を示して導く", "優しく見守り支える"] },
-      { q: "あなたの理想の休日は？", a: ["未知の場所を旅する", "音楽やイベントで楽しむ", "家でゆっくり料理や整理をする", "ドライブや散歩で気分転換", "自然の中で静かに過ごす"] },
-      { q: "あなたが他人に言われて嬉しい言葉は？", a: ["新しいことに挑戦しててすごいね", "あなたといると楽しい", "頼りになるね", "あなたがいると安心する", "優しいね"] },
-      { q: "あなたが落ち着く色は？", a: ["青", "赤", "黄", "白", "黒"] },
-      { q: "あなたが『神』として力を持つなら？", a: ["新しい世界を切り開く力", "人々を笑顔にする力", "豊かさと安定をもたらす力", "人を正しい道へ導く力", "癒しと安らぎを与える力"] }
+      { q: "新しい場所に行く時、あなたはどう行動する？", a: ["ワクワクして探検したくなる", "みんなで楽しめることがあるか考える", "安全や準備が必要なことがあるか確認する", "道順や目的をしっかり把握する", "静かにその場の空気を感じる"] },
+      { q: "あなたが最も大切だと感じる価値観は？", a: ["知恵と学び", "信頼と誠実", "礼節と秩序", "正義と導き", "思いやりと優しさ"] },
+      { q: "困難に直面したとき、あなたはどう行動する？", a: ["新しい方法を試してみる", "周囲を励ましながら乗り越える", "実績のある現実的な手段で一歩ずつ解決する", "状況を見極めて最善の道を選ぶ", "まず心を落ち着けることを最優先する"] },
+      { q: "あなたが最も惹かれる自然の要素は？", a: ["木々の成長や森の香り", "炎のゆらめきや太陽の光", "大地のぬくもりや食物の実り", "金属の輝きや風の音", "水の流れや波の音"] },
+      { q: "あなたが得意とする感覚は？", a: ["香りや空気の変化に気付く", "音や声のトーンを感じ取る", "味や食のバランスを見抜く", "鋭い観察力や新しい視点で物を見る", "触れた感覚で安心を感じる"] },
+      { q: "チームの中でのあなたの役割は？", a: ["新しいアイデアを出す", "ムードメーカーとして盛り上げる", "実務を支えてまとめる", "方向性を示して導く", "優しく見守り支える"] },
+      { q: "あなたの理想の休日は？", a: ["未知の場所を旅する", "音楽やイベントで楽しむ", "家でゆっくり料理や整理をする", "ドライブや散歩で気分転換", "自然の中や神社で静かに過ごす"] },
+      { q: "あなたが周りから言われて嬉しい言葉は？", a: ["新しいことに挑戦しててすごいね", "あなたといると楽しい", "あなたがいると安心する", "頼りになるね", "優しいね"] },
+      { q: "あなたが落ち着く色は？", a: ["青 / 緑", "赤 / 橙", "黄 / 茶", "黒 / 金", "白 / 銀"] },
+      { q: "あなたが『神』として特別な力を持つならどれ？", a: ["新しい世界を切り開く力", "人々を笑顔にする力", "豊かさと安定をもたらす力", "人々をそれぞれの正しい生き方へ導く力", "癒しと安らぎを与える力"] }
     ];
 
-    const gods = ["興玉神", "天宇受売命", "宇迦之御魂神", "猿田毘古神", "豊玉毘売命"];
-    const colors = ["blue", "red", "yellow", "white", "black"];
+    const gods = [
+      "興玉神（おきたまのかみ）", 
+      "天宇受売命（あめのうずめのみこと）", 
+      "宇迦之御魂神（うかのみたまのかみ）", 
+      "猿田毘古神（さるたびこのかみ）", 
+      "豊玉毘売命（とよたまびめのみこと）"];
+    const colors = ["blue", "red", "yellow", "black", "white"];
+    const weights = [1, 1, 1, 2, 2, 1, 1, 1, 2, 1];
     let current = 0;
     const scores = [0, 0, 0, 0, 0];
 
@@ -179,8 +223,12 @@
       nextBtn.style.display = "none";
       progress.textContent = `第${index + 1}問 / ${questions.length}問`;
 
-      document.querySelectorAll('input[name="answer"]').forEach(input => {
-        input.addEventListener("change", () => {
+      const labels = document.querySelectorAll('.options label');
+      labels.forEach(label => {
+        label.addEventListener("click", () => {
+          labels.forEach(l => l.classList.remove("selected"));
+          label.classList.add("selected");
+          label.querySelector("input").checked = true;
           nextBtn.style.display = "inline-block";
         });
       });
@@ -189,7 +237,7 @@
     nextBtn.addEventListener("click", () => {
       const selected = document.querySelector('input[name="answer"]:checked');
       if (selected) {
-        scores[selected.value]++;
+        scores[selected.value] += weights[current];
         current++;
         if (current < questions.length) {
           showQuestion(current);
@@ -205,13 +253,36 @@
       progress.style.display = "none";
       const result = document.getElementById("result");
       const resultText = document.getElementById("resultText");
+      const shareButtons = document.getElementById("shareButtons");
       const maxScore = Math.max(...scores);
       const godIndex = scores.indexOf(maxScore);
-      resultText.textContent = gods[godIndex];
+      const godName = gods[godIndex];
+      resultText.textContent = godName;
       result.style.display = "block";
-    }
+      shareButtons.style.display = "block";
 
+      const shareUrl = encodeURIComponent(window.location.href);
+      const shareText = encodeURIComponent(`私を導く神は「${godName}」でした！ #神様診断`);
+
+      document.getElementById("twitterShare").onclick = () => {
+        window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`, "_blank");
+      };
+      document.getElementById("facebookShare").onclick = () => {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, "_blank");
+      };
+      document.getElementById("lineShare").onclick = () => {
+        window.open(`https://social-plugins.line.me/lineit/share?url=${shareUrl}`, "_blank");
+      };
+      document.getElementById("instagramShare").onclick = () => {
+        alert("Instagramは外部共有リンクを直接開けません。結果をスクリーンショットして投稿してください。");
+      };
+      document.getElementById("tiktokShare").onclick = () => {
+        alert("TikTokは外部共有リンクを直接開けません。結果をスクリーンショットして投稿してください。");
+      };
+    }
     showQuestion(current);
+
+  
   </script>
 </body>
 </html>
